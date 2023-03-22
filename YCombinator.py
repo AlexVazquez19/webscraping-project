@@ -21,9 +21,9 @@ while True:
 
 # Get raw html of website
 page_src = driver.page_source
-soup = BeautifulSoup(page_src,'html.parser')
+main_soup = BeautifulSoup(page_src,'html.parser')
 driver.quit()
-company_card_container = soup.find('div',class_='q1vdpoLtJkwUT8jN22K2 dsStC1AzZueqISZqfHLZ')
+company_card_container = main_soup.find('div',class_='q1vdpoLtJkwUT8jN22K2 dsStC1AzZueqISZqfHLZ')
 company_cards = company_card_container.find_all('a',class_='WxyYeI15LZ5U_DOM0z8F no-hovercard')
 
 # Iterate through the company cards to get the names, one-line descriptions, and URLs
@@ -53,8 +53,28 @@ for card in company_cards:
     else:
         company_urls.append(None)
 
+# Iterate through each company page to collect additional data
 
+company_descriptions = []
 
+loading = 0
+for url in company_urls:
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
+    description = soup.find('p',class_='whitespace-pre-line')
+    if description != None:
+        company_descriptions.append(description.text.strip())
+    else:
+        company_descriptions.append(None)
+    loading+=1
+    print(loading)
+    if loading == 5:
+        break
+
+print(company_descriptions)
+print('len:' + str(len(company_descriptions)))
+
+    
 
 
 
