@@ -54,7 +54,9 @@ for card in company_cards:
 
 # Iterate through each company page to collect additional data
 
-company_descriptions,company_websites,years_founded,company_sizes,company_locations = [],[],[],[],[]
+company_descriptions,company_websites,years_founded,company_sizes,\
+    company_locations,linkedin_links,twitter_links,facebook_links,\
+    crunchbase_links = [],[],[],[],[],[],[],[],[]
 
 loading_tracker = 0
 for url in company_urls:
@@ -68,6 +70,10 @@ for url in company_urls:
         years_founded.append(None)
         company_sizes.append(None)
         company_locations.append(None)
+        linkedin_links.append(None)
+        twitter_links.append(None)
+        facebook_links.append(None)
+        crunchbase_links.append(None)
         continue
 
     # Company description
@@ -84,7 +90,7 @@ for url in company_urls:
     else:
         company_websites.append(None)
 
-    # Get the data from the card on the right (includes year founded, team size, location)
+    # Get the data from the card on the right (includes year founded, team size, location, socials)
     right_card = soup.find('div',class_='ycdc-card space-y-1.5 sm:w-[300px]')
     card_data = right_card.find_all('div',class_='flex flex-row justify-between')
     for i in range(len(card_data)): 
@@ -102,6 +108,35 @@ for url in company_urls:
     location = card_data[2][9:]
     company_locations.append(location)
 
+    # LinkedIn profile link
+    linkedin = right_card.find('a',class_='inline-block w-5 h-5 bg-contain bg-image-linkedin')
+    if linkedin != None:
+        linkedin_links.append(linkedin['href'])
+    else:
+        linkedin_links.append(None)
+
+    # Twitter profile link
+    twitter = right_card.find('a',class_='inline-block w-5 h-5 bg-contain bg-image-twitter')
+    if twitter != None:
+        twitter_links.append(twitter['href'])
+    else:
+        twitter_links.append(None)
+
+    # Facebook profile link
+    facebook = right_card.find('a',class_='inline-block w-5 h-5 bg-contain bg-image-facebook')
+    if facebook != None:
+        facebook_links.append(facebook['href'])
+    else:
+        facebook_links.append(None)
+
+    # Crunchbase profile link
+    crunchbase = right_card.find('a',class_='inline-block w-5 h-5 bg-contain bg-image-crunchbase')
+    if crunchbase != None:
+        crunchbase_links.append(crunchbase['href'])
+    else:
+        crunchbase_links.append(None)
+
+    # Track progress of the loop
     loading_tracker+=1
     print(loading_tracker)
 
@@ -110,7 +145,8 @@ for url in company_urls:
 dictionary = {"Company Name":company_names,"One-liner":one_line_descriptions,
     "Description":company_descriptions,"Website":company_websites,
     "Year Founded":years_founded,"Location":company_locations,
-    "Team Size":company_sizes}
+    "Team Size":company_sizes,"LinkedIn":linkedin_links,"Twitter":twitter_links,
+    "Facebook":facebook_links,"Crunchbase":crunchbase_links}
 
 dataframe = pd.DataFrame(dictionary)
 
