@@ -85,4 +85,5 @@ dict = {"Symbol":symbol, "Name":name, "Price (Intraday)":price_intraday,
     "PE Ratio (TTM)":pe_ratio}
 
 dataframe = pd.DataFrame(dict)
-print(dataframe)
+
+dataframe.to_csv('YahooFinance.csv') # CSV File
