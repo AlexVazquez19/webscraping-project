@@ -4,7 +4,10 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
+# Setup path for Chrome webdriver
 driver = webdriver.Chrome(executable_path="/Users/alejandrovazquez/Desktop/Misc./chromedriver_mac64/chromedriver")
+
+# Open the URL with webdriver
 URL = "https://www.ycombinator.com/companies/"
 driver.get(URL)
 time.sleep(4)
@@ -141,7 +144,7 @@ for url in company_urls:
     print(loading_tracker)
 
 
-# Creates a DataFrame
+# Create a DataFrame
 dictionary = {"Company Name":company_names,"One-liner":one_line_descriptions,
     "Description":company_descriptions,"Website":company_websites,
     "Year Founded":years_founded,"Location":company_locations,

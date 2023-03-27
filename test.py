@@ -4,9 +4,24 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
-page = requests.get('https://www.ycombinator.com/companies/11874')
-soup = BeautifulSoup(page.content, "html.parser")
-if 'Internal Server Error' in str(soup):
-    print('true')
-else:
-    print('false')
+# Get the HTML content
+url = "https://finance.yahoo.com/most-active?count=25&offset=25"
+driver = webdriver.Chrome(executable_path="/Users/alejandrovazquez/Desktop/Misc./chromedriver_mac64/chromedriver")
+driver.get(url)
+time.sleep(6)
+
+page_src = driver.page_source
+soup = BeautifulSoup(page_src,'html.parser')
+driver.quit()
+symbol=[]
+table = soup.find('div',id='scr-res-table')
+table_body = table.find('tbody')
+rows = table_body.find_all('tr')
+
+for row in rows:
+    row_data = row.find_all('td')
+    for i in range(len(row_data)):
+        if row_data[i]['aria-label'] == 'Symbol':
+            symbol.append(row_data[i].text)
+
+print(symbol)
