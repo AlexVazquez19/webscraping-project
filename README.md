@@ -18,7 +18,7 @@ From the [Y Combinator Startup Directory](https://www.ycombinator.com/companies/
 - year founded
 - location
 - team size
-- social links (linkedIn, Facebook, Twitter, Crunchbase)
+- social links (LinkedIn, Facebook, Twitter, Crunchbase)
 
 Here is a [google spreadsheet](https://docs.google.com/spreadsheets/d/1GrnNFGHbi1ES1nWV4iymrPi_e9SBBKpDEyCVYnWkHx8/edit#gid=1678900764) with the data.
 
