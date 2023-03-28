@@ -12,7 +12,9 @@ from selenium import webdriver
 driver = webdriver.Chrome(executable_path="/Users/alejandrovazquez/Desktop/Misc./chromedriver_mac64/chromedriver")
 
 # Get the HTML content
-url = "https://finance.yahoo.com/most-active?count=25&offset=0"
+url = "https://finance.yahoo.com/gainers?count=25&offset=0" # Most active stocks
+#url = "https://finance.yahoo.com/gainers?count=25&offset=0" # Biggest gainers
+#url = "https://finance.yahoo.com/losers?count=25&offset=0" # Biggest losers
 driver.get(url)
 time.sleep(6)
 page_src = driver.page_source
