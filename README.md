@@ -3,8 +3,12 @@ My goal with this project was to learn how to scrape important information from 
 
 The primary libraries I use in this project are Selenium (specifically the WebDriver for Chrome), Beautiful Soup, and Requests. Below are descriptions of the websites I have scraped.
 
-Y Combinator Startup Directory
----
+*Instructions for how to run this code on your own computer are included at the end of this writeup.*
+
+## Y Combinator Startup Directory 
+
+File: `YCombinator.py`
+
 From the [Y Combinator Startup Directory](https://www.ycombinator.com/companies/) I scraped the following data:
 * company names
 * one-line descriptions
@@ -18,8 +22,10 @@ Here is a [google spreadsheet](https://docs.google.com/spreadsheets/d/1GrnNFGHbi
 
 While the main directory page isn't super complex, I added an additional layer of complexity by retrieving the links for each company's page and then requesting the HTML of each page to get additional data, such as the description and year founded which are not displayed on the main directory page.
 
-Yahoo Finance
----
+## Yahoo Finance
+
+File: `YahooFinance.py`
+
 I started by scraping the following data from the [Yahoo Finance Most Active stocks](https://finance.yahoo.com/most-active?count=25&offset=0) page: 
 * Ticker
 * Company name
@@ -34,3 +40,13 @@ I started by scraping the following data from the [Yahoo Finance Most Active sto
 Here is a [google spreadsheet](https://docs.google.com/spreadsheets/d/1xhbVqrE6CJ0y6WOII7bIvMCUlTBw0pJsvnG-wMP233Y/edit?usp=sharing) with the data from 3/27.
 
 You might be wondering why I scraped this data using Python rather than just using the Yahoo Finance API, and it's true that the API is probably a more reliable way to retrieve the data, but I chose to scrape this page to learn how to get data that changes throughout the day and is displayed through a more complex front end. 
+ 
+  
+  
+---
+**How to run the files on your own computer**
+
+1. Install the following libraries: Beautiful Soup, Selenium, Requests, Pandas
+2. Install ChromeDriver from [this page](https://chromedriver.chromium.org/getting-started)
+3. In the .py file you would like to run, change the executable path for the webdriver to your chromedriver's install location
+4. You should be good to go!
